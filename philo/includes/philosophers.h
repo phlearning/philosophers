@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 17:16:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:30:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				nb_of_meals;
 	struct timeval	time;
-	t_philo			
 }	t_data;
 
 typedef	struct s_philo

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 17:14:07 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:29:47 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	dining(t_data *philo, int ac)
 	i = 0;
 	th = malloc(sizeof(pthread_t) * philo->nb_philo);
 	if (!th)
-		return (-1);
+		return ;
 	while (i < philo->nb_forks)
 	{
 		if (pthread_create(&th[i], NULL, &eating, philo != 0))
