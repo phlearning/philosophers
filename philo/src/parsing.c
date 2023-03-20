@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:34:29 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 15:06:16 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/20 16:28:48 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	print_error(char *str)
 	return (-1);
 }
 
-int	parsing_2(t_philo *philo, int ac, char **av, int *err)
+int	parsing_2(t_data *philo, int ac, char **av, int *err)
 {
 	if (ac > 5)
 	{
@@ -34,14 +34,14 @@ int	parsing_2(t_philo *philo, int ac, char **av, int *err)
 	return (0);
 }
 
-int	parsing(t_philo *philo, int ac, char **av)
+int	parsing(t_data *philo, int ac, char **av)
 {
 	int	err;
 
 	err = 0;
 	philo->nb_philo = ft_atoi(av[1]);
-	if (philo->nb_philo <= 1)
-		err = print_error("Nb of philosophers need to be >= 2\n");
+	if (philo->nb_philo <= 0)
+		err = print_error("Nb of philosophers need to be >= 1\n");
 	philo->nb_forks = philo->nb_philo;
 	philo->time_to_die = ft_atoi(av[2]);
 	if (philo->time_to_die <= 0)

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 15:35:20 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/20 17:16:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define SEC_PER_HOUR  3600
 # define SEC_PER_MIN   60
 
-typedef struct s_philo
+typedef struct s_data
 {
 	int				nb_philo;
 	int				nb_forks;
@@ -35,6 +35,16 @@ typedef struct s_philo
 	int				time_to_sleep;
 	int				nb_of_meals;
 	struct timeval	time;
+	t_philo			
+}	t_data;
+
+typedef	struct s_philo
+{
+	pthread_mutex_t	mutex_fork;
+	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_think;
+	pthread_mutex_t	mutex_sleep;
+	int				id;
 }	t_philo;
 
 /* Utils */
@@ -46,8 +56,10 @@ long	convert_to_readable_time(struct timeval time);
 
 /* Parsing */
 
-int		parsing(t_philo *philo, int ac, char **av);
-int		parsing_2(t_philo *philo, int ac, char **av, int *err);
+int		parsing(t_data *philo, int ac, char **av);
+int		parsing_2(t_data *philo, int ac, char **av, int *err);
 int		print_error(char *str);
+
+void	dining(t_data *philo, int ac);
 
 #endif
