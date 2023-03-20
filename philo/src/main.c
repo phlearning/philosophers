@@ -6,43 +6,42 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/14 17:18:31 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/20 15:49:02 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <unistd.h>
 
-int primes[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29 };
+// void	dining(t_philo *philo, int ac)
+// {
+// 	pthread_mutex_t	mutex;
+// }
 
-void* routine(void* arg) {
-    // sleep(1);
-    int index = *(int*)arg;
-    printf("%d ", primes[index]);
-    free(arg);
+/* Les philosophes doivent prendre 4 arguments (+ 1 optionnel);
+	- number_of_philosophers
+	- time_to_die
+	- time_to_eat
+	- time_to_sleep
+	- [number_of_times_each_philosopher_must_eat]*/
+int	main(int ac, char **av)
+{
+	t_philo	*philo;
+
+	if (ac < 5 || ac > 6)
+	{
+		printf("Usage: ./philosophers nb_philosophers time_to_die");
+		printf(" time_to_eat time_to_sleep [nb_of_meals_needed]\n");
+		return (0);
+	}
+	philo = malloc(sizeof(t_philo));
+	if (!philo)
+		return (0);
+	if (parsing(philo, ac, av) == -1)
+	{
+		free(philo);
+		return (0);
+	}
+	// dining(philo, ac);
+	free(philo);
 	return (0);
-}
-
-int main() {
-    pthread_t th[10];
-	pthread_mutex_t mutex;
-    int i;
-	pthread_mutex_init(mutex, NULL);
-    for (i = 0; i < 10; i++) {
-        int* a = malloc(sizeof(int));
-        *a = i;
-        if (pthread_create(&th[i], NULL, &routine, a) != 0) {
-            perror("Failed to created thread");
-        }
-    }
-    for (i = 0; i < 10; i++) {
-        if (pthread_join(th[i], NULL) != 0) {
-            perror("Failed to join thread");
-        }
-    }
-    
-    return 0;
 }
