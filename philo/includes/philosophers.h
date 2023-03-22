@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 17:30:02 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:28:41 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@
 # include <sys/time.h>
 # include <semaphore.h>
 
-# define SEC_PER_DAY   86400
-# define SEC_PER_HOUR  3600
-# define SEC_PER_MIN   60
+# define SEC_PER_DAY	86400
+# define SEC_PER_HOUR	3600
+# define SEC_PER_MIN	60
+
+# define TAKING_FORK	0
 
 typedef struct s_data
 {
@@ -34,17 +36,28 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_of_meals;
-	struct timeval	time;
+	long int		time_start;
 }	t_data;
 
-typedef	struct s_philo
+typedef struct s_philo
 {
-	pthread_mutex_t	mutex_fork;
-	pthread_mutex_t	mutex_eat;
-	pthread_mutex_t	mutex_think;
-	pthread_mutex_t	mutex_sleep;
 	int				id;
+	int				state;
+	int				l_fork;
+	int				r_fork;
+	int				meals_taken;
+	long int		time_lim;
+	t_data			data;
+	pthread_t		th;
 }	t_philo;
+
+typedef struct s_table
+{
+	t_data			data;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	death;
+	t_philo			**philo;
+}	t_table;
 
 /* Utils */
 

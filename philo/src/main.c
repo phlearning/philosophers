@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 17:29:47 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/22 11:29:38 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 void	*eating(void *arg)
 {
-
+	(void) arg;
+//	return (0);
 }
 
 void	dining(t_data *philo, int ac)
 {
 	pthread_t	*th;
-	int	i;
+	int			i;
+	(void) ac;
 
-	if (ac == 6)
-	{
-		dining_with_nb_meals(philo);
-		return ;
-	}
+	// if (ac == 6)
+	// {
+	// 	dining_with_nb_meals(philo);
+	// 	return ;
+	// }
 	i = 0;
 	th = malloc(sizeof(pthread_t) * philo->nb_philo);
 	if (!th)
 		return ;
 	while (i < philo->nb_forks)
 	{
-		if (pthread_create(&th[i], NULL, &eating, philo != 0))
+		if (pthread_create(&th[i], NULL, &eating, philo) != 0)
 			perror("Failed to create thread");
 		++i;
 	}

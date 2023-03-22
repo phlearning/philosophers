@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:46:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/20 16:06:39 by pvong            ###   ########.fr       */
+/*   Updated: 2023/03/22 10:14:36 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,25 @@ long	convert_to_readable_time(struct timeval time)
 	hour = hms / SEC_PER_HOUR;
 	min = (hms % SEC_PER_HOUR) / SEC_PER_MIN;
 	sec = hms % SEC_PER_MIN;
-	printf("%d:%02d:%02d:%d\n", hour, min, sec, time.tv_usec);
+	printf("%d:%02d:%02d:%ld\n", hour, min, sec, time.tv_usec);
 	return (hms);
+}
+
+long int	get_time(void)
+{
+	struct timeval	current_time;
+	
+	gettimeofday(&current_time, NULL);
+}
+
+void	print_table(t_data *philo)
+{
+	printf("--- TABLE ---\n");
+	printf("nb of philo: %d\n", philo->nb_philo);
+	printf("death timer: %dms\n", philo->time_to_die);
+	printf("sleep time: %dms\n", philo->time_to_sleep);
+	printf("eat time: %dms\n", philo->time_to_eat);
+	if (philo->nb_of_meals > 0)
+		printf("nb_of_meals: %d\n", philo->nb_of_meals);
+	printf("--- ----- ---\n");
 }
