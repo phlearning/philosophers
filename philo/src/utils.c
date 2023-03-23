@@ -63,15 +63,16 @@ long	convert_to_readable_time(struct timeval time)
 	hour = hms / SEC_PER_HOUR;
 	min = (hms % SEC_PER_HOUR) / SEC_PER_MIN;
 	sec = hms % SEC_PER_MIN;
-	printf("%d:%02d:%02d:%ld\n", hour, min, sec, time.tv_usec);
+	printf("%d:%02d:%02d:%d\n", hour, min, sec, time.tv_usec);
 	return (hms);
 }
 
 long int	get_time(void)
 {
 	struct timeval	current_time;
-	
+
 	gettimeofday(&current_time, NULL);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
 }
 
 void	print_table(t_data *philo)

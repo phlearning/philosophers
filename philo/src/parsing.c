@@ -26,11 +26,6 @@ int	parsing_2(t_data *philo, int ac, char **av, int *err)
 		if (philo->nb_of_meals <= 0)
 			*err = print_error("Nb_of_meals needs to be > 0\n");
 	}
-	if (gettimeofday(&philo->time, NULL) == -1)
-	{
-		perror("Error");
-		*err = -1;
-	}
 	return (0);
 }
 

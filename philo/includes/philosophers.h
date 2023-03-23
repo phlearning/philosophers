@@ -70,7 +70,11 @@ long	convert_to_readable_time(struct timeval time);
 
 int		parsing(t_data *philo, int ac, char **av);
 int		parsing_2(t_data *philo, int ac, char **av, int *err);
+
+/* Print */
+
 int		print_error(char *str);
+void	print_table(t_data *philo);
 
 void	dining(t_data *philo, int ac);
 

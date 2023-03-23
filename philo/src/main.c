@@ -15,7 +15,7 @@
 void	*eating(void *arg)
 {
 	(void) arg;
-//	return (0);
+	return (0);
 }
 
 void	dining(t_data *philo, int ac)
@@ -73,6 +73,7 @@ int	main(int ac, char **av)
 		free(philo);
 		return (0);
 	}
+	print_table((philo));
 	dining(philo, ac);
 	free(philo);
 	return (0);
