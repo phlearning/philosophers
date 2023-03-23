@@ -61,21 +61,22 @@ typedef struct s_table
 
 /* Utils */
 
-int		ft_isspace(char c);
-int		ft_isnum(char c);
-int		ft_atoi(char *str);
-long	convert_to_readable_time(struct timeval time);
+int		        ft_isspace(char c);
+int		    ft_isnum(char c);
+int		    ft_atoi(char *str);
+void    conv_to_read_time(long int time);
+long int	get_time(void);
 
 /* Parsing */
 
-int		parsing(t_data *philo, int ac, char **av);
-int		parsing_2(t_data *philo, int ac, char **av, int *err);
+int		    parsing(t_data *philo, int ac, char **av);
+int		    parsing_2(t_data *philo, int ac, char **av, int *err);
 
 /* Print */
 
-int		print_error(char *str);
-void	print_table(t_data *philo);
+int		    print_error(char *str);
+void	    print_table(t_data *philo);
 
-void	dining(t_data *philo, int ac);
+void	    dining(t_data *philo, int ac);
 
 #endif

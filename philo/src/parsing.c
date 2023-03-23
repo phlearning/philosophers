@@ -26,6 +26,7 @@ int	parsing_2(t_data *philo, int ac, char **av, int *err)
 		if (philo->nb_of_meals <= 0)
 			*err = print_error("Nb_of_meals needs to be > 0\n");
 	}
+	philo->time_start = get_time();
 	return (0);
 }
 

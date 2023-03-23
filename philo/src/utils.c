@@ -67,6 +67,22 @@ long	convert_to_readable_time(struct timeval time)
 	return (hms);
 }
 
+void    conv_to_read_time(long int time)
+{
+	long int h;
+	long int m;
+	long int s;
+	long int ms;
+
+	h = time / 1000;
+	h = (h + SEC_PER_HOUR) % SEC_PER_DAY;
+	m = (h % SEC_PER_HOUR) / SEC_PER_MIN;
+	s = h % SEC_PER_MIN;
+	ms = time % 1000;
+	h /= SEC_PER_HOUR;
+	printf("%ldh%02ldm%02lds%03ldms\n", h, m, s, ms);
+}
+
 long int	get_time(void)
 {
 	struct timeval	current_time;
@@ -77,12 +93,14 @@ long int	get_time(void)
 
 void	print_table(t_data *philo)
 {
-	printf("--- TABLE ---\n");
+	printf("---------- TABLE ----------\n");
 	printf("nb of philo: %d\n", philo->nb_philo);
 	printf("death timer: %dms\n", philo->time_to_die);
 	printf("sleep time: %dms\n", philo->time_to_sleep);
 	printf("eat time: %dms\n", philo->time_to_eat);
 	if (philo->nb_of_meals > 0)
 		printf("nb_of_meals: %d\n", philo->nb_of_meals);
-	printf("--- ----- ---\n");
+	printf("time_start: ");
+	conv_to_read_time(philo->time_start);
+	printf("---------- ----- ----------\n");
 }
