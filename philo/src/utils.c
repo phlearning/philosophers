@@ -67,7 +67,7 @@ long	convert_to_readable_time(struct timeval time)
 	return (hms);
 }
 
-void    conv_to_read_time(long int time)
+void    conv_to_read_time(long int time, int flag)
 {
 	long int h;
 	long int m;
@@ -80,7 +80,9 @@ void    conv_to_read_time(long int time)
 	s = h % SEC_PER_MIN;
 	ms = time % 1000;
 	h /= SEC_PER_HOUR;
-	printf("%ldh%02ldm%02lds%03ldms\n", h, m, s, ms);
+	printf("%ldh%02ldm%02lds%03ldms", h, m, s, ms);
+	if (flag == 1)
+		printf("\n");
 }
 
 long int	get_time(void)
@@ -101,6 +103,6 @@ void	print_table(t_data *philo)
 	if (philo->nb_of_meals > 0)
 		printf("nb_of_meals: %d\n", philo->nb_of_meals);
 	printf("time_start: ");
-	conv_to_read_time(philo->time_start);
+	conv_to_read_time(philo->time_start, 1);
 	printf("---------- ----- ----------\n");
 }
