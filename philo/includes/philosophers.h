@@ -47,13 +47,12 @@ typedef struct s_philo
 	int				r_fork;
 	int				meals_taken;
 	long int		time_lim;
-	t_data			data;
 	pthread_t		th;
 }	t_philo;
 
 typedef struct s_table
 {
-	t_data			data;
+	t_data			*data;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	death;
 	t_philo			**philo;

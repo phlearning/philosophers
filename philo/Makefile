@@ -12,7 +12,8 @@ SRC_DIR			= src
 
 SOURCES			= 	main.c \
 					parsing.c \
-					utils.c
+					utils.c \
+					free.c
 
 # SRCB_DIR		=	src_bonus
 

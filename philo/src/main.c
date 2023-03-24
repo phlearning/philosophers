@@ -57,7 +57,7 @@ void	dining(t_data *philo, int ac)
 	- [number_of_times_each_philosopher_must_eat]*/
 int	main(int ac, char **av)
 {
-	t_data	*philo;
+	t_table *tab;
 
 	if (ac < 5 || ac > 6)
 	{
@@ -65,16 +65,24 @@ int	main(int ac, char **av)
 		printf(" time_to_eat time_to_sleep [nb_of_meals_needed]\n");
 		return (0);
 	}
-	philo = malloc(sizeof(t_data));
-	if (!philo)
+	tab = malloc(sizeof(t_table));
+	if (!tab)
 		return (0);
-	if (parsing(philo, ac, av) == -1)
+	tab->data = malloc(sizeof(t_data));
+	if (!tab->data)
 	{
-		free(philo);
+		free(tab);
 		return (0);
 	}
-	print_table((philo));
-	dining(philo, ac);
-	free(philo);
+	if (parsing(tab->data, ac, av) == -1)
+	{
+		free(tab->data);
+		free(tab);
+		return (0);
+	}
+	print_table((tab->data));
+	dining(tab->data, ac);
+	free(tab->data);
+	free(tab);
 	return (0);
 }

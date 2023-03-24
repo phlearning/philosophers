@@ -98,8 +98,8 @@ void	print_table(t_data *philo)
 	printf("---------- TABLE ----------\n");
 	printf("nb of philo: %d\n", philo->nb_philo);
 	printf("death timer: %dms\n", philo->time_to_die);
-	printf("sleep time: %dms\n", philo->time_to_sleep);
 	printf("eat time: %dms\n", philo->time_to_eat);
+	printf("sleep time: %dms\n", philo->time_to_sleep);
 	if (philo->nb_of_meals > 0)
 		printf("nb_of_meals: %d\n", philo->nb_of_meals);
 	printf("time_start: ");
