@@ -76,6 +76,9 @@ int		        parsing_2(t_data *philo, int ac, char **av, int *err);
 int		        print_error(char *str);
 void	        print_table(t_data *philo);
 
+/* Free */
+void            free_tab(t_table *table);
+
 void	        dining(t_data *philo, int ac);
 
 #endif

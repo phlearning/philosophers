@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-void    free_tab(t_table *table)
+void free_tab(t_table *table)
 {
 	int i;
 
@@ -22,10 +22,13 @@ void    free_tab(t_table *table)
 		if (table->philo)
 		{
 			while (table->philo[i])
-		{
-			free(table->philo[i]);
-			i++;
+			{
+				free(table->philo[i]);
+				i++;
+			}
+			free(table->philo);
 		}
-		}
+		if (table->data)
+			free(table->data);
 	}
 }

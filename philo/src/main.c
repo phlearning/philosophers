@@ -76,13 +76,11 @@ int	main(int ac, char **av)
 	}
 	if (parsing(tab->data, ac, av) == -1)
 	{
-		free(tab->data);
-		free(tab);
+		free_tab(tab);
 		return (0);
 	}
 	print_table((tab->data));
 	dining(tab->data, ac);
-	free(tab->data);
-	free(tab);
+	free_tab(tab);
 	return (0);
 }
