@@ -12,12 +12,6 @@
 
 #include "philosophers.h"
 
-void	*eating(void *arg)
-{
-	(void) arg;
-	return (0);
-}
-
 void	dining(t_data *philo, int ac)
 {
 	pthread_t	*th;
