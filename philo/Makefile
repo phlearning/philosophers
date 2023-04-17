@@ -1,4 +1,4 @@
-NAME 			= philosophers
+NAME 			= philo
 
 # Colors
 GREEN			=	\033[0;32m
