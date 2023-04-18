@@ -6,13 +6,13 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 12:00:52 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/18 15:55:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	dining(t_data *philo, int ac)
+void	dining(t_data *ph, int ac)
 {
 	pthread_t	*th;
 	int			i;
@@ -24,17 +24,17 @@ void	dining(t_data *philo, int ac)
 	// 	return ;
 	// }
 	i = 0;
-	th = malloc(sizeof(pthread_t) * philo->nb_philo);
+	th = malloc(sizeof(pthread_t) * ph->nb_philo);
 	if (!th)
 		return ;
-	while (i < philo->nb_forks)
+	while (i < ph->nb_forks)
 	{
-		if (pthread_create(&th[i], NULL, &eating, philo) != 0)
+		if (pthread_create(&th[i], NULL, &eating, ph) != 0)
 			ft_putstr_fd("Failed to create thread", 2);
 		++i;
 	}
 	i = 0;
-	while (i < philo->nb_forks)
+	while (i < ph->nb_forks)
 	{
 		if (pthread_join(th[i], NULL) != 0)
 			ft_putstr_fd("Failed to join thread", 2);
@@ -84,7 +84,6 @@ int	main(int ac, char **av)
 	if (init(ac, av, tab) == 0)
 		return (exit_error("Failed to init\n", tab));
 	print_table((tab->data));
-	
 	dining(tab->data, ac);
 	free_tab(tab);
 	return (0);

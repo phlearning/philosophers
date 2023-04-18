@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 15:00:13 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 09:59:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/18 15:52:51 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 void	*eating(void *arg)
 {
 	(void) arg;
+	t_table *tab;
+	
+	tab = (t_table *) arg;
 	return (0);
 }
