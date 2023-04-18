@@ -6,94 +6,13 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:46:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/22 10:14:36 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/18 11:01:39 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int ft_isspace(char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v' || \
-    c == '\f' || c == '\r' || c == ' ')
-		return (1);
-	return (0);
-}
-
-int ft_isnum(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int ft_atoi(char *str)
-{
-	int res;
-	int sign;
-	int i;
-
-	sign = 1;
-	res = 0;
-	i = 0;
-	while (ft_isspace(str[i]))
-		++i;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		++i;
-	}
-	while (str[i] && ft_isnum(str[i]))
-	{
-		res = res * 10 + (str[i] - '0');
-		++i;
-	}
-	return (res * sign);
-}
-
-long convert_to_readable_time(struct timeval time)
-{
-	int hms;
-	int hour;
-	int min;
-	int sec;
-
-	hms = (time.tv_sec + SEC_PER_HOUR) % SEC_PER_DAY;
-	hour = hms / SEC_PER_HOUR;
-	min = (hms % SEC_PER_HOUR) / SEC_PER_MIN;
-	sec = hms % SEC_PER_MIN;
-	printf("%d:%02d:%02d:%d\n", hour, min, sec, time.tv_usec);
-	return (hms);
-}
-
-void conv_to_read_time(long int time, int flag)
-{
-	long int h;
-	long int m;
-	long int s;
-	long int ms;
-
-	h = time / 1000;
-	h = (h + SEC_PER_HOUR) % SEC_PER_DAY;
-	m = (h % SEC_PER_HOUR) / SEC_PER_MIN;
-	s = h % SEC_PER_MIN;
-	ms = time % 1000;
-	h /= SEC_PER_HOUR;
-	printf("%ldh%02ldm%02lds%03ldms", h, m, s, ms);
-	if (flag == 1)
-		printf("\n");
-}
-
-long int get_time(void)
-{
-	struct timeval current_time;
-
-	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
-}
-
-void print_table(t_data *philo)
+void	print_table(t_data *philo)
 {
 	printf("---------- TABLE ----------\n");
 	printf("nb of philo: %d\n", philo->nb_philo);
@@ -107,9 +26,9 @@ void print_table(t_data *philo)
 	printf("---------- ----- ----------\n");
 }
 
-void print_message(t_philo *philo, t_table *tab, int message)
+void	print_message(t_philo *philo, t_table *tab, int message)
 {
-	long int time;
+	long int	time;
 
 	time = get_time() - tab->data->time_start;
 	conv_to_read_time(time, 0);
@@ -122,4 +41,26 @@ void print_message(t_philo *philo, t_table *tab, int message)
 		printf("is sleeping\n");
 	if (message == THINKING)
 		printf("is thinking\n");
+}
+
+int	print_error(char *str)
+{
+	printf("%s", str);
+	return (-1);
+}
+
+void	ft_putstr_fd(char *str, int fd)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		write(fd, &str[i], 1);
+}
+
+int	exit_error(char *str, t_table *tab)
+{
+	printf("Error %s", str);
+	free_tab(tab);
+	return (0);
 }

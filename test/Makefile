@@ -1,4 +1,4 @@
-NAME 			= philo
+NAME 			= test
 
 # Colors
 GREEN			=	\033[0;32m
@@ -11,13 +11,7 @@ END				=	\033[0m
 SRC_DIR			= src
 
 SOURCES			= 	main.c \
-					atoi.c \
-					eating.c \
-					fork.c \
-					free.c \
-					parsing.c \
-					time.c \
-					utils.c \
+
 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))

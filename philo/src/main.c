@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/03/22 11:29:38 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/18 11:55:27 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,38 +30,34 @@ void	dining(t_data *philo, int ac)
 	while (i < philo->nb_forks)
 	{
 		if (pthread_create(&th[i], NULL, &eating, philo) != 0)
-			perror("Failed to create thread");
+			ft_putstr_fd("Failed to create thread", 2);
 		++i;
 	}
 	i = 0;
 	while (i < philo->nb_forks)
 	{
 		if (pthread_join(th[i], NULL) != 0)
-			perror("Failed to join thread");
+			ft_putstr_fd("Failed to join thread", 2);
 		++i;
 	}
 	return ;
 }
 
-/* Les philosophes doivent prendre 4 arguments (+ 1 optionnel);
-	- number_of_philosophers
-	- time_to_die
-	- time_to_eat
-	- time_to_sleep
-	- [number_of_times_each_philosopher_must_eat]*/
-int	main(int ac, char **av)
+/**
+ * 
+ * @param ac 
+ * @param av 
+ * @param tab 
+ * @return int 
+ */
+int	init(int ac, char **av, t_table *tab)
 {
-	t_table *tab;
-
 	if (ac < 5 || ac > 6)
 	{
-		printf("Usage: ./philosophers nb_philosophers time_to_die");
+		printf("Usage: ./philo nb_philosophers time_to_die");
 		printf(" time_to_eat time_to_sleep [nb_of_meals_needed]\n");
 		return (0);
 	}
-	tab = malloc(sizeof(t_table));
-	if (!tab)
-		return (0);
 	tab->data = malloc(sizeof(t_data));
 	if (!tab->data)
 	{
@@ -73,7 +69,22 @@ int	main(int ac, char **av)
 		free_tab(tab);
 		return (0);
 	}
+	if (init_philo(tab) == -1)
+		return (0);
+	return (1);
+}
+
+int	main(int ac, char **av)
+{
+	t_table	*tab;
+
+	tab = malloc(sizeof(t_table));
+	if (!tab)
+		return (0);
+	if (init(ac, av, tab) == 0)
+		return (exit_error("Failed to init\n", tab));
 	print_table((tab->data));
+	printf("id of philo: %d\n", tab->philo[4]->id);
 	dining(tab->data, ac);
 	free_tab(tab);
 	return (0);
