@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 11:55:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/18 12:00:52 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av)
 	if (init(ac, av, tab) == 0)
 		return (exit_error("Failed to init\n", tab));
 	print_table((tab->data));
-	printf("id of philo: %d\n", tab->philo[4]->id);
+	
 	dining(tab->data, ac);
 	free_tab(tab);
 	return (0);
