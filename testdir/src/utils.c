@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 14:09:18 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 10:58:09 by pvong            ###   ########.fr       */
+/*   Created: 2023/04/19 14:09:00 by pvong             #+#    #+#             */
+/*   Updated: 2023/04/19 14:09:01 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "test.h"
 
-void free_tab(t_table *table)
+void	ft_putstr_fd(char *str, int fd)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	if (table)
-	{
-		if (table->philo)
-		{
-			while (table->philo[i])
-			{
-				free(table->philo[i]);
-				i++;
-			}
-			free(table->philo);
-		}
-		if (table->data)
-			free(table->data);
-	}
+	i = -1;
+	while (str[++i])
+		write(fd, &str[i], 1);
 }

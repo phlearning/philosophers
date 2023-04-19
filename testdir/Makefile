@@ -11,6 +11,8 @@ END				=	\033[0m
 SRC_DIR			= src
 
 SOURCES			= 	main.c \
+					time.c \
+					utils.c \
 
 
 
