@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/19 14:56:04 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/20 12:02:16 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,31 @@
 # define SEC_PER_HOUR    3600
 # define SEC_PER_MIN    60
 
+# define TAKING_FORK    0
+# define EATING         1
+# define SLEEPING       2
+# define THINKING       3
+
+# define NO_NL			0
+# define NL				1
+
 typedef struct s_th
 {
 	pthread_t			*th;
+	int					id;
 	long long			time;
 	pthread_mutex_t		mutex;
 }	t_th;
 
 long convert_to_readable_time(struct timeval time);
-void conv_to_read_time(long int time, int flag);
+void print_time(long int time, int flag);
 long int get_time(void);
 
 /* Utils */
 
 void	ft_putstr_fd(char *str, int fd);
+void	print_status(t_th *th, int message);
+int		init_ph(t_th *threads);
+
 
 #endif

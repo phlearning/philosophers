@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:42:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/19 14:06:19 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/20 11:44:33 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ long convert_to_readable_time(struct timeval time)
 	return (hms);
 }
 
-void conv_to_read_time(long int time, int flag)
+void print_time(long int time, int flag)
 {
 	long int h;
 	long int m;
