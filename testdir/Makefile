@@ -13,6 +13,7 @@ SRC_DIR			= src
 SOURCES			= 	main.c \
 					time.c \
 					utils.c \
+					init.c \
 
 
 
