@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:09:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/20 15:45:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/24 13:36:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	ft_putstr_fd(char *str, int fd)
 		write(fd, &str[i], 1);
 }
 
-void	print_status(t_th *th, int message, int i)
+void	print_status(t_ph *ph, int message)
 {
-	th->time = get_time() - th->start_time;
-	print_time(th->time, NO_NL);
-	printf(" Philosopher %d ", i);
+	ph->env->time = get_time() - ph->env->start_time;
+	print_time(ph->env->time, NO_NL);
+	printf("Philosopher %d ", ph->id + 1);
 	if (message == TAKING_FORK)
 		printf("has taken a fork\n");
 	if (message == EATING)

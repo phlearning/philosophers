@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/20 15:59:53 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/24 14:51:19 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@
 # define NO_NL			0
 # define NL				1
 
-#define NB 10
+// TEMP
+# define NB 10
+# define T2T 200
+# define T2E 200
+# define T2S 800
+# define T2D 200
 
 struct	s_ph;
 
@@ -47,13 +52,14 @@ typedef struct s_th
 	long long			start_time;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		*mutex_forks;
-}	t_th;
+}	t_env;
 
 typedef struct s_ph
 {
 	int					id;
 	int					left_fork;
 	int					right_fork;
+	t_env				*env;
 	pthread_mutex_t		mutex_eat;
 }	t_ph;
 
@@ -64,8 +70,7 @@ long int get_time(void);
 /* Utils */
 
 void	ft_putstr_fd(char *str, int fd);
-void	print_status(t_th *th, int message, int i);
-int		init_ph(t_th *threads);
-
+void	print_status(t_ph *ph, int message);
+int		init_ph(t_env *threads);
 
 #endif
