@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/24 14:51:19 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/27 16:09:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define SEC_PER_MIN    60
 
 # define TAKING_FORK    0
+# define TAKING_FORK2	6
 # define EATING         1
 # define SLEEPING       2
 # define THINKING       3
@@ -72,5 +73,10 @@ long int get_time(void);
 void	ft_putstr_fd(char *str, int fd);
 void	print_status(t_ph *ph, int message);
 int		init_ph(t_env *threads);
+
+/* Fork */
+
+void	take_fork(t_ph *ph);
+void	clean_fork(t_ph *ph);
 
 #endif

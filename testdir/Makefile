@@ -14,6 +14,7 @@ SOURCES			= 	main.c \
 					time.c \
 					utils.c \
 					init.c \
+					fork.c \
 
 
 
