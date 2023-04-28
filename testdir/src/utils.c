@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:09:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/27 16:14:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/04/28 17:35:44 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ void	print_status(t_ph *ph, int message)
 	print_time(ph->env->time, NO_NL);
 	printf("Philosopher %d ", ph->id + 1);
 	if (message == TAKING_FORK)
-		printf("has taken a fork %d\n", ph->id + 1);
-	if (message == TAKING_FORK2)
-		printf("has taken a fork %d\n", (ph->id + 1) % NB + 1);
-	if (message == EATING)
+		printf("has taken a fork %d\n", ph->left_fork + 1);
+	else if (message == TAKING_FORK2)
+		printf("has taken a fork %d\n", ph->right_fork + 1);
+	else if (message == EATING)
 		printf("is eating\n");
-	if (message == SLEEPING)
+	else if (message == SLEEPING)
 		printf("is sleeping\n");
-	if (message == THINKING)
+	else if (message == THINKING)
 		printf("is thinking\n");
+	else if (message == DIED)
+		printf("died\n");
 }
