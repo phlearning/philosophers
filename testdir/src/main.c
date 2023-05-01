@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/28 17:39:17 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 16:41:12 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	eating(t_ph *ph)
 	print_status(ph, EATING);
 	usleep(T2E * 1000);
 	ph->eating = 0;
-	pthread_mutex_unlock(&ph->mutex_eat);
+	pthread_mutex_unlock(&ph->env->mutex);
+	// pthread_mutex_unlock(&ph->mutex_eat);
 }
 
 void thinking(t_ph *ph)
@@ -35,46 +36,52 @@ void	*monitor(void *data)
 	t_ph	*ph;
 
 	ph = data;
+	pthread_mutex_lock(&ph->mutex_death);
 	if (!ph->eating && get_time() < ph->death_timer)
 	{
-		// pthread_mutex_unlock(&ph->mutex_death);
+		pthread_mutex_unlock(&ph->mutex_death);
 		print_status(ph, DIED);
-		return (1);
+		return ((void *) 1);
 	}
+	usleep(1000);
+	return (0);
 }
 
 void	*routine(void *data)
 {
 	int			i;
 	t_ph		*ph;
-	pthread_t	*th;
+	uint64_t tid;
+	pthread_threadid_np(NULL, &tid);
 	// t_env	*threads;
 
 	// threads = data;
 	ph = data;
-	// pthread_create(&th, NULL, )
-	pthread_mutex_lock(&ph->env->mutex);
+	// if (pthread_create(&th, NULL, &monitor, &ph) != 0)
+	// 	return ((void *) 1);
+	if (ph->id % 2 == 0)
+		usleep(T2E * 1000);
+	pthread_mutex_lock(&ph->mutex);
 	i = -1;
-	while (++i < 1)
+	while (1)
 	{
 		take_fork(ph);
 		eating(ph);
 		clean_fork(ph);
 		thinking(ph);
 	}
-	printf(" Ending thread\n");
-	pthread_mutex_unlock(&ph->env->mutex);
+	printf(" Ending thread %llu\n", tid);
+	pthread_mutex_unlock(&ph->mutex);
 	return (0);
 }
 
 int	main(void)
 {
 	t_env		*env;
-	int		i;
+	int			i;
 
 	env = malloc(sizeof(t_env));
 	init_ph(env);
-			// printf("hello\n");
 	print_time(env->start_time, 1);
 	i = -1;
 	while (++i < NB)

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/28 17:32:40 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 16:38:40 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <time.h>
 # include <sys/time.h>
+# include <sys/types.h>
 
 # define SEC_PER_DAY    86400
 # define SEC_PER_HOUR    3600
@@ -53,6 +54,7 @@ typedef struct s_env
 	long long			start_time;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		*mutex_forks;
+	pthread_mutex_t		mutex_print;
 }	t_env;
 
 typedef struct s_ph
@@ -64,6 +66,7 @@ typedef struct s_ph
 	int					right_fork;
 	long long			death_timer;
 	t_env				*env;
+	pthread_mutex_t		mutex;
 	pthread_mutex_t		mutex_eat;
 	pthread_mutex_t		mutex_death;
 }	t_ph;

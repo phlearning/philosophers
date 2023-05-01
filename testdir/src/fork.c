@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 13:59:05 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/28 15:13:04 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 13:01:37 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	take_fork(t_ph *ph)
 	printf("\t left_fork: %d\n", ph->left_fork + 1);
 	pthread_mutex_lock(&ph->env->mutex_forks[ph->right_fork]);
 	print_status(ph, TAKING_FORK2);
-	printf("\t left_fork: %d\n", ph->right_fork + 1);
+	printf("\t right_fork: %d\n", ph->right_fork + 1);
 }
 
 void	clean_fork(t_ph *ph)
