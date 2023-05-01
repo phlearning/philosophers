@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 17:26:54 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 17:57:08 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define NL				1
 
 // TEMP
-# define NB 10
+# define NB 3
 # define T2T 200
 # define T2E 200
 # define T2S 200
