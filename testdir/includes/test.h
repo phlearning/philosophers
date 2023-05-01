@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 16:38:40 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 17:26:54 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@
 # define T2T 200
 # define T2E 200
 # define T2S 200
-# define T2D 200
+# define T2D 1
+# define A_T_E 10
 
 struct	s_ph;
 
 typedef struct s_env
 {
 	pthread_t			*th;
-	struct	s_ph		*ph;
+	struct s_ph			*ph;
 	long long			time;
 	long long			start_time;
+	int					dead;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		*mutex_forks;
 	pthread_mutex_t		mutex_print;
@@ -61,7 +63,7 @@ typedef struct s_ph
 {
 	int					id;
 	int					eating;
-	int					amount_to_eat;
+	int					amount_eatten;
 	int					left_fork;
 	int					right_fork;
 	long long			death_timer;

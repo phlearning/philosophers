@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 16:41:12 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 17:54:57 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	eating(t_ph *ph)
 {
 	pthread_mutex_lock(&ph->mutex_eat);
 	ph->eating = 1;
+	ph->amount_eatten++;
 	ph->death_timer = get_time() + T2D;
 	print_status(ph, EATING);
 	usleep(T2E * 1000);
@@ -36,11 +37,13 @@ void	*monitor(void *data)
 	t_ph	*ph;
 
 	ph = data;
-	pthread_mutex_lock(&ph->mutex_death);
-	if (!ph->eating && get_time() < ph->death_timer)
+	// pthread_mutex_lock(&ph->mutex_death);
+	if (!ph->eating && get_time() > ph->death_timer)
 	{
-		pthread_mutex_unlock(&ph->mutex_death);
+		// pthread_mutex_unlock(&ph->mutex_death);
+		ph->env->dead = 1;
 		print_status(ph, DIED);
+		exit(EXIT_SUCCESS);
 		return ((void *) 1);
 	}
 	usleep(1000);
@@ -51,14 +54,14 @@ void	*routine(void *data)
 {
 	int			i;
 	t_ph		*ph;
-	uint64_t tid;
-	pthread_threadid_np(NULL, &tid);
-	// t_env	*threads;
+	// pthread_t	th;
+	uint64_t	tid;
 
-	// threads = data;
+	pthread_threadid_np(NULL, &tid);
 	ph = data;
 	// if (pthread_create(&th, NULL, &monitor, &ph) != 0)
-	// 	return ((void *) 1);
+		// return ((void *) 1);
+	// pthread_detach(th);
 	if (ph->id % 2 == 0)
 		usleep(T2E * 1000);
 	pthread_mutex_lock(&ph->mutex);
@@ -84,10 +87,13 @@ int	main(void)
 	init_ph(env);
 	print_time(env->start_time, 1);
 	i = -1;
+	// printf("time: %ld\n", get_time());
+	// printf("env->death_time: %lld\n", env->ph[0].death_timer);
 	while (++i < NB)
 	{
 		if (pthread_create(&env->th[i], NULL, &routine, &env->ph[i]) != 0)
 			return (i);
+		// pthread_detach(env->th[i]);
 	}
 	i = -1;
 	while (++i < NB)

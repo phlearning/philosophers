@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:42:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/21 15:32:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 17:12:36 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 long convert_to_readable_time(struct timeval time)
 {
-	int hms;
-	int hour;
-	int min;
-	int sec;
+	int	hms;
+	int	hour;
+	int	min;
+	int	sec;
 
 	hms = (time.tv_sec + SEC_PER_HOUR) % SEC_PER_DAY;
 	hour = hms / SEC_PER_HOUR;
@@ -29,10 +29,10 @@ long convert_to_readable_time(struct timeval time)
 
 void print_time(long int time, int flag)
 {
-	long int h;
-	long int m;
-	long int s;
-	long int ms;
+	long int	h;
+	long int	m;
+	long int	s;
+	long int	ms;
 
 	h = time / 1000;
 	h = h % SEC_PER_DAY;

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:21:36 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 16:40:50 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/01 17:53:47 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	init_mutex(t_env *env)
 		pthread_mutex_init(&env->ph[i].mutex_death, NULL);
 		pthread_mutex_init(&env->ph[i].mutex_eat, NULL);
 		pthread_mutex_init(&env->ph[i].mutex, NULL);
-		// pthread_mutex_init(&env->ph[i].mutex_print, NULL);
 	}
 	return (0);
 }
@@ -39,6 +38,7 @@ int	init_ph(t_env *env)
 	env->th = malloc(sizeof(pthread_t) * NB);
 	pthread_mutex_init(&env->mutex, NULL);
 	pthread_mutex_init(&env->mutex_print, NULL);
+	env->dead = 0;
 	env->ph = malloc(sizeof(t_ph) * NB);
 	if (!env->ph)
 		return (-1);
@@ -51,6 +51,8 @@ int	init_ph(t_env *env)
 		env->ph[i].left_fork = i % NB;
 		env->ph[i].right_fork = (i + 1) % NB;
 		env->ph[i].env = env;
+		env->ph[i].amount_eatten = 0;
+		env->ph[i].death_timer = get_time() + T2D;
 		pthread_mutex_init(&env->mutex_forks[i], NULL);
 	}
 	return (0);
