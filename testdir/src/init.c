@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:21:36 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 17:53:47 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/02 14:13:09 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	init_ph(t_env *env)
 		env->ph[i].right_fork = (i + 1) % NB;
 		env->ph[i].env = env;
 		env->ph[i].amount_eatten = 0;
-		env->ph[i].death_timer = get_time() + T2D;
 		pthread_mutex_init(&env->mutex_forks[i], NULL);
 	}
 	return (0);

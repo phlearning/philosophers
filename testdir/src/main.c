@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/01 17:54:57 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:16:00 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	eating(t_ph *ph)
 {
 	pthread_mutex_lock(&ph->mutex_eat);
 	ph->eating = 1;
+	ph->last_meal_time = get_time();
 	ph->amount_eatten++;
-	ph->death_timer = get_time() + T2D;
 	print_status(ph, EATING);
 	usleep(T2E * 1000);
 	ph->eating = 0;
@@ -35,32 +35,47 @@ void thinking(t_ph *ph)
 void	*monitor(void *data)
 {
 	t_ph	*ph;
+	int		i;
+	uint64_t	tid;
 
-	ph = data;
-	// pthread_mutex_lock(&ph->mutex_death);
-	if (!ph->eating && get_time() > ph->death_timer)
+	pthread_threadid_np(NULL, &tid);
+	i = 0;
+	ph = (t_ph *) data;
+	while (1)
 	{
-		// pthread_mutex_unlock(&ph->mutex_death);
-		ph->env->dead = 1;
-		print_status(ph, DIED);
-		exit(EXIT_SUCCESS);
-		return ((void *) 1);
+		// pthread_mutex_lock(&ph->mutex);
+		printf("\ttid [%lld] \t monitor death_timer[%d]: %lld\t get_time() %ld\n", tid, i, \
+			ph->death_timer, get_time());
+		if (get_time() > ph->death_timer)
+		{
+			ph->env->dead = 1;
+			// pthread_mutex_unlock(&ph->mutex);
+			print_status(ph, DIED);
+			exit(EXIT_SUCCESS);
+			return ((void *) 1);
+		}
+		// pthread_mutex_unlock(&ph->mutex);
+		// printf("\tHello last_meal[%d] \t%lld\n", i, ph->last_meal_time);
+		// sleep(1);
+		usleep(T2E * 1000);
+		i++;
 	}
-	usleep(1000);
-	return (0);
 }
 
 void	*routine(void *data)
 {
 	int			i;
 	t_ph		*ph;
-	// pthread_t	th;
+	pthread_t	*th;
 	uint64_t	tid;
 
+	th = malloc(sizeof(pthread_t));
 	pthread_threadid_np(NULL, &tid);
 	ph = data;
-	// if (pthread_create(&th, NULL, &monitor, &ph) != 0)
-		// return ((void *) 1);
+	ph->last_meal_time = get_time();
+	ph->death_timer = ph->last_meal_time + T2D;
+	if (pthread_create(th, NULL, &monitor, &ph) != 0)
+		return ((void *) 1);
 	// pthread_detach(th);
 	if (ph->id % 2 == 0)
 		usleep(T2E * 1000);
@@ -70,6 +85,8 @@ void	*routine(void *data)
 	{
 		take_fork(ph);
 		eating(ph);
+		ph->death_timer = get_time() + T2D;
+		printf("\ttid [%lld]\tget_time() %ld || death_timer %lld\n", tid, get_time(), ph->death_timer);
 		clean_fork(ph);
 		thinking(ph);
 	}
@@ -87,8 +104,8 @@ int	main(void)
 	init_ph(env);
 	print_time(env->start_time, 1);
 	i = -1;
-	// printf("time: %ld\n", get_time());
-	// printf("env->death_time: %lld\n", env->ph[0].death_timer);
+	// printf("time: \t\t\t\t%ld\n", get_time());
+	// printf("env->death_time: \t\t%lld\n", env->ph[0].death_timer);
 	while (++i < NB)
 	{
 		if (pthread_create(&env->th[i], NULL, &routine, &env->ph[i]) != 0)
