@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:21:36 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/02 14:13:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/03 14:07:28 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	init_ph(t_env *env)
 	i = -1;
 	env->start_time = get_time();
 	env->time = env->start_time;
-	env->th = malloc(sizeof(pthread_t) * NB);
+	// env->th = malloc(sizeof(pthread_t) * NB);
 	pthread_mutex_init(&env->mutex, NULL);
 	pthread_mutex_init(&env->mutex_print, NULL);
 	env->dead = 0;
@@ -52,6 +52,7 @@ int	init_ph(t_env *env)
 		env->ph[i].right_fork = (i + 1) % NB;
 		env->ph[i].env = env;
 		env->ph[i].amount_eatten = 0;
+		env->ph[i].eating = 0;
 		pthread_mutex_init(&env->mutex_forks[i], NULL);
 	}
 	return (0);
