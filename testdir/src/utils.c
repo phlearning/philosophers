@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 14:09:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/03 15:27:11 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/05 13:57:17 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	ft_putstr_fd(char *str, int fd)
 	i = -1;
 	while (str[++i])
 		write(fd, &str[i], 1);
+}
+
+int	ft_error(char *str)
+{
+	ft_putstr_fd("Error :", 1);
+	ft_putstr_fd(str, 1);
+	return (1);
 }
 
 void	print_status(t_ph *ph, int message)

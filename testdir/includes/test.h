@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/03 15:26:43 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/05 13:57:48 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define NL				1
 
 // TEMP
-# define NB 2
+# define NB 3
 # define T2T 200
 # define T2E 200
 # define T2S 200
@@ -83,6 +83,7 @@ long int	get_time(void);
 void			ft_putstr_fd(char *str, int fd);
 void			print_status(t_ph *ph, int message);
 int				init_ph(t_env *env);
+int				ft_error(char *str);
 
 /* Fork */
 

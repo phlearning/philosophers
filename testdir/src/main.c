@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/03 16:29:19 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/05 14:01:35 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 void	eating(t_ph *ph)
 {
-	// pthread_mutex_lock(&ph->mutex_eat);
+	pthread_mutex_lock(&ph->mutex_eat);
 	ph->eating = 1;
 	ph->last_meal_time = get_time();
 	ph->death_timer = ph->last_meal_time + T2D;
 	ph->amount_eatten++;
 	print_status(ph, EATING);
-	usleep(T2E * 1000);
+	// usleep(T2E * 1000);
+	usleep(100);
 	ph->eating = 0;
 	// pthread_mutex_unlock(&ph->env->mutex);
-	// pthread_mutex_unlock(&ph->mutex_eat);
+	pthread_mutex_unlock(&ph->mutex_eat);
 }
 
 void thinking(t_ph *ph)
@@ -64,14 +65,14 @@ void thinking(t_ph *ph)
 	}
 } */
 
-static void	*routine(void *data)
+void	*routine(void *data)
 {
 	int			i;
 	t_ph		*ph;
 	// pthread_t	th;
-	uint64_t	tid;
+	// uint64_t	tid;
 	
-	pthread_threadid_np(NULL, &tid);
+	// pthread_threadid_np(NULL, &tid);
 	ph = (t_ph *)data;
 	ph->last_meal_time = get_time();
 	ph->death_timer = ph->last_meal_time + T2D;
@@ -80,42 +81,49 @@ static void	*routine(void *data)
 	// pthread_detach(th);
 	// if (ph->id % 2 == 0)
 		// usleep(T2E * 1000);
-	// pthread_mutex_lock(&ph->mutex);
+	pthread_mutex_lock(&ph->mutex);
 	i = -1;
-	printf("ph dt: %lld\n", ph->death_timer);
 	while (1)
 	{
 		take_fork(ph);
 		eating(ph);
-		printf("\ttid [%lld]\tget_time() %ld || death_timer %lld\n", tid, get_time(), ph->death_timer);
 		clean_fork(ph);
 		thinking(ph);
 	}
-	// printf(" Ending thread %llu\n", tid);
-	// pthread_mutex_unlock(&ph->mutex);
-	return (0);
+	pthread_mutex_unlock(&ph->mutex);
+	return (NULL);
 }
 
-static int	create_threads(t_env *env)
+int	create_threads(t_env *env)
 {
 	pthread_t	th;
-	int			i;
 	t_ph		*ph;
+	int			i;
 
 	i = -1;
 	while (++i < NB)
 	{
-		ph = &env->ph[i];
+		ph = (void *)&env->ph[i];
 		if (pthread_create(&th, NULL, &routine, ph) != 0)
-		{
-			printf("Couldn't create thread %d\n", i);
-			return (i);
-		}
+			return (ft_error("Couldn't create threads\n"));
 		pthread_detach(th);
 		usleep(100);
 	}
 	return (0);
 }
+
+/* int	join_threads(t_env *env)
+{
+	(void) env;
+	int		i;
+
+	i = -1;
+	while (++i < NB)
+	{
+		if (pthread_join(env->th[i], NULL) ! 0)
+			return (i);
+	}
+} */
 
 int	main(void)
 {
@@ -135,9 +143,3 @@ int	main(void)
 	// pthread_mutex_destroy(&env->mutex);
 	return (0);
 }
-
-	// while (++i < NB)
-	// {
-	// 	if (pthread_join(th, NULL) != 0)
-	// 		return (i);
-	// }
