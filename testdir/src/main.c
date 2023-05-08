@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/05 14:01:35 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/08 10:19:09 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void thinking(t_ph *ph)
 
 void	*routine(void *data)
 {
-	int			i;
 	t_ph		*ph;
 	// pthread_t	th;
 	// uint64_t	tid;
@@ -82,7 +81,6 @@ void	*routine(void *data)
 	// if (ph->id % 2 == 0)
 		// usleep(T2E * 1000);
 	pthread_mutex_lock(&ph->mutex);
-	i = -1;
 	while (1)
 	{
 		take_fork(ph);
@@ -128,18 +126,15 @@ int	create_threads(t_env *env)
 int	main(void)
 {
 	t_env		*env;
-	int			i;
 
 	env = malloc(sizeof(t_env));
 	if (!env)
 		return (1);
 	init_ph(env);
 	print_time(env->start_time, 1);
-	i = -1;
 	// printf("time: \t\t\t\t%ld\n", get_time());
 	// printf("env->death_time: \t\t%lld\n", env->ph[0].death_timer);
 	create_threads(env);
-	i = -1;
 	// pthread_mutex_destroy(&env->mutex);
 	return (0);
 }
