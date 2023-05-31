@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/05 13:57:48 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/10 14:49:11 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@
 # define NL				1
 
 // TEMP
-# define NB 3
+# define NB 4
 # define T2T 200
 # define T2E 200
 # define T2S 200
-# define T2D 1
+# define T2D 800
 # define A_T_E 10
 
 struct	s_ph;
@@ -54,6 +54,7 @@ typedef struct s_env
 	long long			time;
 	long long			start_time;
 	int					dead;
+	pthread_mutex_t		someone_died;
 	pthread_mutex_t		mutex;
 	pthread_mutex_t		*mutex_forks;
 	pthread_mutex_t		mutex_print;
@@ -89,5 +90,8 @@ int				ft_error(char *str);
 
 void	take_fork(t_ph *ph);
 void	clean_fork(t_ph *ph);
+
+int		init(t_env *env);
+int		clear_env(t_env *env);
 
 #endif
