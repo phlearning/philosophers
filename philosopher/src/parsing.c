@@ -6,11 +6,52 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:34:29 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 11:45:55 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:57:49 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	ft_is_only_digit(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_input(int ac, char **av)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	while (++i < ac)
+	{
+		if (!ft_is_only_digit(av[i]))
+		{
+			printf("Wrong input must be only positive int: %s\n", av[i]);
+			return (0);
+		}
+		nb = ft_check_max_atoi(av[i]);
+		else if (nb == -1)
+		{
+			printf("Integer must be within 0 and 2147483647: %s\n", av[i]);
+			return (0);
+		}
+		else if (i == 1 && (nb <= 0 || nb > 200))
+		{
+			printf("Nb of philo must be within 0 and 200: %s\n", av[i]);
+			return (0);
+		}
+	}
+	return (1);
+}
 
 int	parsing_2(t_data *data, int ac, char **av, int *err)
 {
@@ -46,30 +87,30 @@ int	parsing(t_data *data, int ac, char **av)
 	return (err);
 }
 
-int	init_philo(t_table *tab)
-{
-	int	i;
+// int	init_philo(t_table *tab)
+// {
+// 	int	i;
 
-	i = 0;
-	tab->philo = malloc(sizeof(t_philo) * (tab->data->nb_philo + 1));
-	if (!tab->philo)
-		return (-1);
-	tab->philo[tab->data->nb_philo + 1] = 0;
-	while (i < tab->data->nb_philo)
-	{
-		tab->philo[i] = malloc(sizeof(t_philo));
-		if (!tab->philo[i])
-			return (-1);
-		tab->philo[i]->id = i;
-		tab->philo[i]->l_fork = i;
-		tab->philo[i]->l_fork = (i + 1) % tab->data->nb_philo;
-		tab->philo[i]->meals_taken = 0;
-		tab->philo[i]->time_lim = get_time() \
-				+ ((tab->data->time_to_die) * 1000) - tab->data->time_start;
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	tab->philo = malloc(sizeof(t_philo) * (tab->data->nb_philo + 1));
+// 	if (!tab->philo)
+// 		return (-1);
+// 	tab->philo[tab->data->nb_philo + 1] = 0;
+// 	while (i < tab->data->nb_philo)
+// 	{
+// 		tab->philo[i] = malloc(sizeof(t_philo));
+// 		if (!tab->philo[i])
+// 			return (-1);
+// 		tab->philo[i]->id = i;
+// 		tab->philo[i]->l_fork = i;
+// 		tab->philo[i]->l_fork = (i + 1) % tab->data->nb_philo;
+// 		tab->philo[i]->meals_taken = 0;
+// 		tab->philo[i]->time_lim = get_time() \
+// 				+ ((tab->data->time_to_die) * 1000) - tab->data->time_start;
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 // int init(t_table *tab, int ac, char **av)
 // {

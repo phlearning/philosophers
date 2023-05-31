@@ -18,7 +18,9 @@ SOURCES			= 	main.c \
 					parsing.c \
 					time.c \
 					utils.c \
-
+					init.c \
+					print.c \
+					
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))
 

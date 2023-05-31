@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:43:07 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/14 19:43:09 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:35:11 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef enum e_status
 t_env	*ft_init_env(int argc, char **argv);
 
 // ----- VALIDATION ----- //
-int		ft_is_valid_input(int argc, char **argv);
+int		check_input(int argc, char **argv);
 int		ft_integer_atoi(const char *str);
 
 // ----- SIMULATION ----- //

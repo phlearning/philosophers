@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 15:55:59 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/31 17:26:14 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,16 @@ int	main(int ac, char **av)
 {
 	t_table	*tab;
 
-	tab = malloc(sizeof(t_table));
+	tab = NULL;
+	if (!(check_input(ac, av)))
+		return (EXIT_FAILURE);
+	tab = init_tab(ac, av);
 	if (!tab)
-		return (0);
-	if (init(ac, av, tab) == 0)
-		return (exit_error("Failed to init\n", tab));
-	print_table((tab->data));
-	dining(tab->data, ac);
+		return (EXIT_FAILURE);
+	// print_table((tab->data));
+	// dining(tab->data, ac);
+	if (!(start_dining(tab)))
+		return (EXIT_FAILURE);
 	free_tab(tab);
 	return (0);
 }

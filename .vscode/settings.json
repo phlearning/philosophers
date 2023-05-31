@@ -1,6 +1,11 @@
 {
 	"files.associations": {
 		"philosophers.h": "c",
-		"test.h": "c"
+		"test.h": "c",
+		"philo.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
 	}
 }

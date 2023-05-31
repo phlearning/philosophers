@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:17:00 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/10 14:48:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:02:51 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	create_threads(t_env *env)
 
 int	main(void)
 {
-	t_env		env;
+	t_env		*env;
 
 	init(&env);
 	print_time(env.start_time, 1);

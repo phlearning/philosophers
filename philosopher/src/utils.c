@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:46:40 by pvong             #+#    #+#             */
-/*   Updated: 2023/04/18 11:01:39 by pvong            ###   ########.fr       */
+/*   Updated: 2023/05/31 18:44:08 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	print_table(t_data *philo)
 	printf("sleep time: %dms\n", philo->time_to_sleep);
 	if (philo->nb_of_meals > 0)
 		printf("nb_of_meals: %d\n", philo->nb_of_meals);
-	printf("time_start: ");
-	conv_to_read_time(philo->time_start, 1);
 	printf("---------- ----- ----------\n");
 }
 
@@ -61,6 +59,28 @@ void	ft_putstr_fd(char *str, int fd)
 int	exit_error(char *str, t_table *tab)
 {
 	printf("Error %s", str);
-	free_tab(tab);
+	if (tab)
+		free_tab(tab);
+	return (EXIT_FAILURE);
+}
+
+void	*exit_error2(char *str, t_table *tab)
+{
+	printf("Error %s", str);
+	if (tab)
+		free_tab(tab);
 	return (0);
+}
+
+void	check_n_sleep(t_table *tab, long int sleep_time)
+{
+	long int	get_up_time;
+
+	get_up = get_time() + sleep_time;
+	while (get_time < get_up_time)
+	{
+		if (game_over(tab))
+			break ;
+		usleep(100);
+	}
 }

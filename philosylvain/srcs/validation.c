@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: synicole <synicole@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:09:48 by synicole          #+#    #+#             */
-/*   Updated: 2023/04/30 15:09:50 by synicole         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:35:11 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_integer_atoi(const char *str)
  *
  * @return int 1 if all arguments are valid, otherwise 0.
  */
-int	ft_is_valid_input(int argc, char **argv)
+int	check_input(int argc, char **argv)
 {
 	int	i;
 	int	nb;
@@ -75,6 +75,7 @@ int	ft_is_valid_input(int argc, char **argv)
 		if (!ft_contains_only_digit(argv[i]))
 			return (ft_msg(MSG_INVALID_INPUT_DIGIT, argv[i], 0));
 		nb = ft_integer_atoi(argv[i]);
+		// printf("nb : %d\n", nb);
 		if (nb == -1)
 			return (ft_msg(MSG_INVALID_INPUT_DIGIT, argv[i], 0));
 		if (i == 1 && (nb <= 0 || nb > ft_integer_atoi(MAX_PHILOS)))
