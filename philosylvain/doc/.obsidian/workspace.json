@@ -1,0 +1,161 @@
+{
+  "main": {
+    "id": "8e5143b39ecf91a7",
+    "type": "split",
+    "children": [
+      {
+        "id": "9f4845db4d63fbe4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "de7be3c76a5c4b66",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Architecture.canvas",
+                "viewState": {
+                  "x": 3337.5511630253122,
+                  "y": 1143.0274266157285,
+                  "zoom": 0.06687790341583998
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "be34232e76a6f651",
+    "type": "split",
+    "children": [
+      {
+        "id": "c812bc26272bae6a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4c4797a2e329ede5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "9a32f9ee1169f476",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "over",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6d42df1b30540e0f",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "dce65cdec20c0289",
+    "type": "split",
+    "children": [
+      {
+        "id": "f854e52ceaa2c88c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bc6fabbbd66d0a87",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Architecture.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a2f20ef574e2e559",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Architecture.canvas",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "41befc60f4db3327",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "26d5778dd0846ee6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Architecture.canvas"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "de7be3c76a5c4b66",
+  "lastOpenFiles": [
+    "Lexique.md",
+    "Architecture.canvas",
+    "ft_start_simulation.md",
+    "Functions.png",
+    "fr.subject.pdf"
+  ]
+}
