@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:42:25 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/31 17:32:22 by pvong            ###   ########.fr       */
+/*   Updated: 2023/06/06 11:31:25 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	conv_to_read_time(long int time, int flag)
 	long int	ms;
 
 	h = time / 1000;
-	h = (h + 2 * SEC_PER_HOUR) % SEC_PER_DAY;
+	h = h % SEC_PER_DAY;
 	m = (h % SEC_PER_HOUR) / SEC_PER_MIN;
 	s = h % SEC_PER_MIN;
 	ms = time % 1000;
@@ -50,5 +50,6 @@ long int	get_time(void)
 	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
-	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000);
+	return (current_time.tv_sec * 1000 + current_time.tv_usec / 1000 \
+		+ (2*SEC_PER_HOUR * 1000));
 }

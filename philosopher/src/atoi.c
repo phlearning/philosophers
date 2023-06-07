@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:51:30 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/31 16:52:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/06/02 17:34:42 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@
  */
 int	ft_check_max_atoi(char *str)
 {
-	unsigned long int nb;
+	unsigned long long int nb;
 	int i;
 
 	i = 0;
 	nb = 0;
-	while (str[i] && ft_is_only_digit(str[i]))
+	while (str[i] && is_digit(str[i]))
 	{
 		nb = nb * 10 + (str[i] - '0');
 		i++;

@@ -12,7 +12,7 @@ SRC_DIR			= src
 
 SOURCES			= 	main.c \
 					atoi.c \
-					eating.c \
+					dining.c \
 					fork.c \
 					free.c \
 					parsing.c \
@@ -20,6 +20,7 @@ SOURCES			= 	main.c \
 					utils.c \
 					init.c \
 					print.c \
+					monitoring.c \
 					
 
 SRC = $(addprefix $(SRC_DIR)/,$(SOURCES))

@@ -6,11 +6,18 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:34:29 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/31 16:57:49 by pvong            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:32:52 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	is_digit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 int	ft_is_only_digit(char *str)
 {
@@ -39,12 +46,12 @@ int	check_input(int ac, char **av)
 			return (0);
 		}
 		nb = ft_check_max_atoi(av[i]);
-		else if (nb == -1)
+		if (nb == -1)
 		{
 			printf("Integer must be within 0 and 2147483647: %s\n", av[i]);
 			return (0);
 		}
-		else if (i == 1 && (nb <= 0 || nb > 200))
+		if (i == 1 && (nb <= 0 || nb > 200))
 		{
 			printf("Nb of philo must be within 0 and 200: %s\n", av[i]);
 			return (0);
@@ -53,73 +60,36 @@ int	check_input(int ac, char **av)
 	return (1);
 }
 
-int	parsing_2(t_data *data, int ac, char **av, int *err)
-{
-	if (ac > 5)
-	{
-		data->nb_of_meals = ft_atoi(av[5]);
-		if (data->nb_of_meals <= 0)
-			*err = print_error("Nb_of_meals needs to be > 0\n");
-	}
-	data->time_start = get_time();
-	return (0);
-}
-
-int	parsing(t_data *data, int ac, char **av)
-{
-	int	err;
-
-	err = 0;
-	data->nb_philo = ft_atoi(av[1]);
-	if (data->nb_philo <= 0)
-		err = print_error("Nb of philosophers need to be >= 1\n");
-	data->nb_forks = data->nb_philo;
-	data->time_to_die = ft_atoi(av[2]);
-	if (data->time_to_die <= 0)
-		err = print_error("Time_to_die needs to be > 0\n");
-	data->time_to_eat = ft_atoi(av[3]);
-	if (data->time_to_eat <= 0)
-		err = print_error("Time_to_eat needs to be > 0\n");
-	data->time_to_sleep = ft_atoi(av[4]);
-	if (data->time_to_sleep <= 0)
-		err = print_error("Time_to_sleep needs to be > 0\n");
-	parsing_2(data, ac, av, &err);
-	return (err);
-}
-
-// int	init_philo(t_table *tab)
+// int	parsing_2(t_data *data, int ac, char **av, int *err)
 // {
-// 	int	i;
-
-// 	i = 0;
-// 	tab->philo = malloc(sizeof(t_philo) * (tab->data->nb_philo + 1));
-// 	if (!tab->philo)
-// 		return (-1);
-// 	tab->philo[tab->data->nb_philo + 1] = 0;
-// 	while (i < tab->data->nb_philo)
+// 	if (ac > 5)
 // 	{
-// 		tab->philo[i] = malloc(sizeof(t_philo));
-// 		if (!tab->philo[i])
-// 			return (-1);
-// 		tab->philo[i]->id = i;
-// 		tab->philo[i]->l_fork = i;
-// 		tab->philo[i]->l_fork = (i + 1) % tab->data->nb_philo;
-// 		tab->philo[i]->meals_taken = 0;
-// 		tab->philo[i]->time_lim = get_time() \
-// 				+ ((tab->data->time_to_die) * 1000) - tab->data->time_start;
-// 		i++;
+// 		data->nb_of_meals = ft_atoi(av[5]);
+// 		if (data->nb_of_meals <= 0)
+// 			*err = print_error("Nb_of_meals needs to be > 0\n");
 // 	}
+// 	data->time_start = get_time();
 // 	return (0);
 // }
 
-// int init(t_table *tab, int ac, char **av)
+// int	parsing(t_data *data, int ac, char **av)
 // {
-// 	int err;
+// 	int	err;
 
 // 	err = 0;
-// 	err = parsing(tab->data, ac, av);
-// 	if (err == -1)
-// 		return (err);
-// 	err = init_philo(tab);
+// 	data->nb_philo = ft_atoi(av[1]);
+// 	if (data->nb_philo <= 0)
+// 		err = print_error("Nb of philosophers need to be >= 1\n");
+// 	data->nb_forks = data->nb_philo;
+// 	data->time_to_die = ft_atoi(av[2]);
+// 	if (data->time_to_die <= 0)
+// 		err = print_error("Time_to_die needs to be > 0\n");
+// 	data->time_to_eat = ft_atoi(av[3]);
+// 	if (data->time_to_eat <= 0)
+// 		err = print_error("Time_to_eat needs to be > 0\n");
+// 	data->time_to_sleep = ft_atoi(av[4]);
+// 	if (data->time_to_sleep <= 0)
+// 		err = print_error("Time_to_sleep needs to be > 0\n");
+// 	parsing_2(data, ac, av, &err);
 // 	return (err);
 // }

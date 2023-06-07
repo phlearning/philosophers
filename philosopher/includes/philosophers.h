@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:57 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/31 18:54:09 by pvong            ###   ########.fr       */
+/*   Updated: 2023/06/06 11:16:23 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
+# include <sys/syscall.h>
 # include <time.h>
 # include <unistd.h>
 
@@ -40,6 +41,10 @@
 # define THINKING 3
 # define TAKE_FORK_L 4
 # define TAKE_FORK_R 5
+
+# define INPUT "./philo [nb_philo] \
+[time_to_die] [time_to_eat] [time_to_sleep] \
+(opt: nb_of_meals_needed)\n"
 
 /* -------------------------------------------------------------------------- */
 /*                                   STRUCT                                   */
@@ -78,8 +83,8 @@ typedef struct s_philo
 typedef struct s_table
 {
 	// t_data				*data;
+	unsigned int		nb_philo;
 	int					game_over;
-	int					nb_philo;
 	int					meals_needed;
 	long int			time_to_die;
 	long int			time_to_eat;
@@ -98,8 +103,11 @@ typedef struct s_table
 /* dining.c */
 
 void					dining(t_data *philo, int ac);
-void					*eating(void *arg);
-static void				*one_ph(t_philo *philo);
+void					eating(t_philo *philo);
+void					*one_ph(t_philo *philo);
+void					take_fork(t_philo *philo);
+void					clean_fork(t_philo *philo);
+void					eating(t_philo *philo);
 
 /* Fork */
 
@@ -108,6 +116,8 @@ static void				*one_ph(t_philo *philo);
 int						exit_error(char *str, t_table *tab);
 void					*exit_error2(char *str, t_table *tab);
 void					check_n_sleep(t_table *tab, long int sleep_time);
+void					end_mutexes(t_table *tab);
+void					join_dining_threads(t_table *tab);
 
 /* Atoi */
 
@@ -120,17 +130,25 @@ int						ft_check_max_atoi(char *str);
 
 int						start_dining(t_table *tab);
 int						game_over(t_table *tab);
+void					thinking(t_philo *philo, int flag_print);
+
+/* monitoring.c */
+
+int						is_philo_dead(t_philo *philo);
+int						check_meals_n_death(t_table *tab);
+void					*monitoring(void *data);
 
 /* Print */
 
 int						print_error(char *str);
-void					print_table(t_data *philo);
+void					print_table(t_table *tab);
 void					print_message(t_philo *philo, t_table *tab,
 							int message);
 void					print_philo(t_philo *philo, char *str, int newline);
-void					print_state(t_philo *philo, char *str,
-							int flag_to_report, int status);
+void					print_state(t_philo *philo, int flag_to_report,
+							int status);
 void					ft_putstr_fd(char *str, int fd);
+void					print_philo_infos(t_table *tab);
 
 /* Time */
 
@@ -140,18 +158,19 @@ long int				get_time(void);
 
 /* Init */
 
-int						init(int ac, char **av, t_table *tab);
-t_philo					*init_philo(t_table *tab);
+// int						init(int ac, char **av, t_table *tab);
+t_philo					**init_philo(t_table *tab);
 t_table					*init_tab(int ac, char **av);
-static pthread_mutex_t	*init_forks(t_table *tab);
-static int				init_mutex(t_table *tab);
+pthread_mutex_t			*init_forks(t_table *tab);
+int						init_mutex(t_table *tab);
 
 /* Parsing */
 
 int						parsing(t_data *philo, int ac, char **av);
 int						parsing_2(t_data *philo, int ac, char **av, int *err);
-int						init_philo(t_table *tab);
+// int						init_philo(t_table *tab);
 int						ft_is_only_digit(char *str);
+int						is_digit(char c);
 int						check_input(int ac, char **av);
 
 /* Free */
