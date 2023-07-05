@@ -6,11 +6,20 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 18:09:05 by pvong             #+#    #+#             */
-/*   Updated: 2023/06/06 11:46:06 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:50:22 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	ft_putstr_fd(char *str, int fd)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		write(fd, &str[i], 1);
+}
 
 void	print_philo(t_philo *philo, char *str, int newline)
 {
@@ -43,19 +52,14 @@ void	print_state(t_philo *philo, int flag_to_report, int status)
 	pthread_mutex_unlock(&philo->tab->print_mutex);
 }
 
-void	print_philo_infos(t_table *tab)
+void	print_table(t_table *tab)
 {
-	unsigned int	i;
-
-	i = -1;
-	if (!tab)
-		return ;
-	printf("\n------ INFO PHILO -------\n\n");
-	while (tab->philo[++i])
-	{
-		printf("--- PHILO_%d ---\n", tab->philo[i]->id);
-		printf("Left_fork: \t%d\n", tab->philo[i]->l_fork);
-		printf("Left_fork: \t%d\n", tab->philo[i]->r_fork);
-		printf("\n");
-	}
+	printf("---------- TABLE ----------\n");
+	printf("nb of philo: %d\n", tab->nb_philo);
+	printf("time_to_die: %dms\n", (int) tab->time_to_die);
+	printf("time_to_eat: %dms\n", (int) tab->time_to_eat);
+	printf("time_to_sleep: %dms\n", (int) tab->time_to_sleep);
+	if (tab->meals_needed > 0)
+		printf("nb_of_meals_needed: %d\n", tab->meals_needed);
+	printf("---------- ----- ----------\n");
 }

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 18:37:07 by pvong             #+#    #+#             */
-/*   Updated: 2023/06/02 16:44:32 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:30:41 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_meals_n_death(t_table *tab)
 
 void	*monitoring(void *data)
 {
-	t_table *tab;
+	t_table	*tab;
 
 	tab = (t_table *) data;
 	if (tab->meals_needed == 0)

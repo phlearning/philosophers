@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:51:30 by pvong             #+#    #+#             */
-/*   Updated: 2023/06/02 17:34:42 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:30:30 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
  */
 int	ft_check_max_atoi(char *str)
 {
-	unsigned long long int nb;
-	int i;
+	unsigned long long int	nb;
+	int						i;
 
 	i = 0;
 	nb = 0;

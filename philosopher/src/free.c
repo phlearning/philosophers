@@ -6,15 +6,15 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 14:09:18 by pvong             #+#    #+#             */
-/*   Updated: 2023/05/31 17:18:04 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:52:34 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void free_tab(t_table *table)
+void	free_tab(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!table)
@@ -23,16 +23,19 @@ void free_tab(t_table *table)
 	{
 		if (table->philo)
 		{
-			while (table->philo[i])
+			while (table->philo[i] && i < (int) table->nb_philo)
 			{
 				if (table->philo[i])
+				{
 					free(table->philo[i]);
+					table->philo[i] = NULL;
+				}	
 				i++;
 			}
 			free(table->philo);
+			table->philo = NULL;
 		}
-		// if (table->data)
-		// 	free(table->data);
 	}
 	free(table);
+	table = NULL;
 }

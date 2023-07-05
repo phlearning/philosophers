@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 11:15:28 by pvong             #+#    #+#             */
-/*   Updated: 2023/06/06 11:44:41 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:27:51 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	main(int ac, char **av)
 	conv_to_read_time(get_time(), 1);
 	if (!tab)
 		return (EXIT_FAILURE);
-	// print_philo_infos(tab);
 	if (!(start_dining(tab)))
 		return (EXIT_FAILURE);
 	join_dining_threads(tab);

@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:39:48 by pvong             #+#    #+#             */
-/*   Updated: 2023/06/06 11:12:37 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 13:31:26 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_mutex(t_table *tab)
 
 t_philo	**init_philo(t_table *tab)
 {
-	t_philo	**philos;
+	t_philo			**philos;
 	unsigned int	i;
 
 	philos = malloc(sizeof(t_philo) * tab->nb_philo);
@@ -63,13 +63,12 @@ t_philo	**init_philo(t_table *tab)
 		philos[i]->l_fork = i;
 		philos[i]->r_fork = (i + 1) % tab->nb_philo;
 	}
-	// printf("hello from init philo\n");
 	return (philos);
 }
 
 t_table	*init_tab(int ac, char **av)
 {
-	t_table *tab;
+	t_table	*tab;
 
 	tab = malloc(sizeof(t_table));
 	if (!tab)
@@ -79,7 +78,6 @@ t_table	*init_tab(int ac, char **av)
 	tab->time_to_eat = ft_check_max_atoi(av[3]);
 	tab->time_to_sleep = ft_check_max_atoi(av[4]);
 	tab->game_over = 0;
-	// printf("hello from init_tab\n");
 	tab->meals_needed = -1;
 	if (ac == 6)
 		tab->meals_needed = ft_check_max_atoi(av[5]);

@@ -13,7 +13,7 @@ SRC_DIR			= src
 SOURCES			= 	main.c \
 					atoi.c \
 					dining.c \
-					fork.c \
+					dining_2.c \
 					free.c \
 					parsing.c \
 					time.c \
@@ -50,7 +50,7 @@ DEBUG			= debug
 all:	$(NAME)
 
 $(TMP):
-	@mkdir -p $(OBJS_DIR)
+	mkdir -p $(OBJS_DIR)
 
 $(TMPFS):
 	@mkdir -p $(OBJS_DIRFS)
@@ -59,12 +59,12 @@ $(TMPFT):
 	@mkdir -p $(OBJS_DIRFT)
 
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ -pthread
+	mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@ -pthread
 	@echo "Compiling $@..."
 
 $(NAME): $(TMP) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -pthread
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -pthread
 	@echo "$(GREEN) $(NAME) Compiled $(END)"
 
 $(OBJS_DIRFS)/%.o: $(SRC_DIR)/%.c
