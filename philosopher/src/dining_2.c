@@ -6,7 +6,7 @@
 /*   By: pvong <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 13:33:11 by pvong             #+#    #+#             */
-/*   Updated: 2023/07/05 13:50:27 by pvong            ###   ########.fr       */
+/*   Updated: 2023/07/05 14:08:59 by pvong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	start_dining(t_table *tab)
 	return (1);
 }
 
-/* void	thinking(t_philo *philo, int flag_print)
+void	thinking(t_philo *philo, int flag_print)
 {
 	long int	time;
 
@@ -76,6 +76,7 @@ int	start_dining(t_table *tab)
 	time = (philo->tab->time_to_die - (get_time() - philo->time_last_meal) \
 			- philo->tab->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->meal_mutex);
+	printf("TIME: %ld\n", time);
 	if (time < 0)
 		time = 0;
 	if (time == 0 && flag_print == 1)
@@ -85,10 +86,11 @@ int	start_dining(t_table *tab)
 	if (flag_print == 0)
 		print_state(philo, 0, THINKING);
 	check_n_sleep(philo->tab, time);
-} */
+}
 
-void	thinking(t_philo *philo, int flag_print)
+/* void	thinking(t_philo *philo, int flag_print)
 {
 	if (flag_print == 0)
 		print_state(philo, 0, THINKING);
-}
+	check_n_sleep(philo->tab, 0);
+} */

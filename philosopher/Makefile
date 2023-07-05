@@ -41,7 +41,7 @@ OBJSFT 			= $(addprefix ./$(OBJS_DIRFT)/,$(SOURCES:.c=.o))
 
 CC				= gcc
 
-CFLAGS 			= -Wall -Werror -Wextra
+CFLAGS 			= -g3 -Wall -Werror -Wextra
 
 INCLUDE 		= -I includes
 
